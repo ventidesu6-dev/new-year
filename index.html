@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="tl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Happy New Year 2026 🎆</title>
+
+<style>
+html, body {
+    margin: 0;
+    padding: 0;
+    font-family: "Segoe UI", Arial, sans-serif;
+    background: black;
+    color: white;
+    overflow-x: hidden;
+}
+
+/* FIREWORK CANVAS */
+canvas {
+    position: fixed;
+    inset: 0;
+    z-index: 1;
+}
+
+/* LOBBY */
+.lobby {
+    position: relative;
+    z-index: 2;
+    min-height: 100vh;
+    text-align: center;
+    padding: 40px 15px 80px;
+}
+
+.lobby h1 {
+    font-size: clamp(32px, 6vw, 48px);
+    margin-bottom: 10px;
+    animation: glow 2s infinite alternate;
+}
+
+@keyframes glow {
+    from { text-shadow: 0 0 10px #ff4d6d; }
+    to { text-shadow: 0 0 25px #ffd166; }
+}
+
+.lobby p {
+    opacity: 0.9;
+}
+
+/* INPUT */
+.input-area {
+    margin-top: 30px;
+}
+
+input, button {
+    padding: 12px;
+    font-size: 16px;
+    border-radius: 6px;
+    border: none;
+}
+
+input {
+    width: min(260px, 80vw);
+}
+
+button {
+    margin-top: 10px;
+    background: #ff4d6d;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #ff1e4d;
+}
+
+/* MESSAGE BOX */
+#messageBox {
+    display: none;
+    margin: 40px auto 0;
+    background: white;
+    color: #333;
+    padding: 25px;
+    border-radius: 18px;
+    width: min(90%, 480px);
+    max-height: 60vh;
+    overflow-y: auto;
+    animation: reveal 0.9s ease forwards;
+}
+
+#messageBox h2 {
+    color: #ff4d6d;
+}
+
+#messageBox p {
+    line-height: 1.6;
+    white-space: pre-line;
+    font-size: 15px;
+}
+
+@keyframes reveal {
+    from {
+        opacity: 0;
+        transform: translateY(40px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="canvas"></canvas>
+
+<div class="lobby">
+    <h1>🎆 Happy New Year 2026 🎆</h1>
+    <p>I-type ang pangalan mo para sa espesyal na mensahe ✨</p>
+
+    <div class="input-area">
+        <input type="text" id="nameInput" placeholder="Ilagay ang pangalan mo">
+        <br>
+        <button onclick="showMessage()">Enter</button>
+    </div>
+
+    <div id="messageBox">
+        <h2 id="title"></h2>
+        <p id="message"></p>
+    </div>
+</div>
+
+<script>
+/* ===== MESSAGES BY FIRST LETTER ===== */
+const messages = {
+A: `Ikaw ay simbolo ng bagong simula at tapang.
+Sa lahat ng pinagdaanan mo, pinili mong lumaban at manatiling totoo.
+Ngayong 2026, sana’y mas piliin mo ang sarili mo at ang kapayapaan ng puso mo.
+Marami ka pang mararating. Karapat-dapat ka sa lahat ng magagandang bagay. 🎆`,
+
+J: `Isa kang taong may lakas kahit hindi palaging nakikita.
+Tahimik kang lumalaban at patuloy na tumatayo.
+Ngayong bagong taon, sana’y mas maniwala ka pa sa sarili mo.
+May mga taong naniniwala sa’yo. 🎉`,
+
+C: `May kakaiba kang kakayahang magbigay liwanag sa iba.
+Ang kabutihan mo ay ramdam kahit sa simpleng paraan.
+Ngayong 2026, sana’y bumalik sa’yo ang lahat ng kabutihan na ibinibigay mo. ✨`,
+
+N: `Tahimik pero matatag — ganyan ka.
+Hindi man palaging pansin, tuloy-tuloy ang progreso mo.
+Ngayong taon, piliin mo ang mga bagay na tunay na nagpapasaya sa’yo. 🎆`,
+
+K: `Puno ka ng potensyal at pangarap.
+Huwag mong hayaang hadlangan ka ng duda.
+Ngayong 2026, sana’y mas buo ang loob mong abutin ang gusto mo.
+Malayo pa ang mararating mo. 🚀`,
+
+E: `May puso kang marunong umunawa at magmahal.
+Ang presensya mo ay nagbibigay ginhawa sa iba.
+Ngayong bagong taon, piliin mo rin ang sarili mo.
+Mahalaga ka. 💕`,
+
+D: `Isa kang patunay ng tibay at determinasyon.
+Kahit mahirap, hindi ka sumusuko.
+Ngayong 2026, sana’y mas maging malinaw ang pangarap mo.
+Tuloy lang — malayo na ang narating mo. 🔥`,
+
+M: `May kakayahan kang gawing magaan ang mabibigat na araw.
+Ang presensya mo ay may dalang saya.
+Ngayong taon, sana’y mas dumami pa ang moments na ipagmamalaki mo.
+Happy New Year! 🎉`
+};
+
+function showMessage() {
+    const name = document.getElementById("nameInput").value.trim();
+    if (!name) {
+        alert("Maglagay muna ng pangalan 😊");
+        return;
+    }
+
+    const firstLetter = name.charAt(0).toUpperCase();
+    const text = messages[firstLetter] || 
+`Maligayang Bagong Taon!
+Nawa’y maging puno ng saya, pag-asa, at bagong simula ang 2026 para sa’yo. 🎆`;
+
+    document.getElementById("title").innerText = "Para kay " + name + " 💫";
+    document.getElementById("message").innerText = text;
+    document.getElementById("messageBox").style.display = "block";
+}
+
+/* ===== FIREWORKS ===== */
+const canvas = document.getElementById("canvas");
+const ctx = canvas.getContext("2d");
+
+function resize() {
+    canvas.width = innerWidth;
+    canvas.height = innerHeight;
+}
+resize();
+addEventListener("resize", resize);
+
+class Particle {
+    constructor(x, y, color) {
+        this.x = x;
+        this.y = y;
+        this.color = color;
+        this.angle = Math.random() * Math.PI * 2;
+        this.speed = Math.random() * 5 + 2;
+        this.life = 100;
+    }
+    update() {
+        this.x += Math.cos(this.angle) * this.speed;
+        this.y += Math.sin(this.angle) * this.speed;
+        this.life--;
+    }
+    draw() {
+        ctx.globalAlpha = this.life / 100;
+        ctx.fillStyle = this.color;
+        ctx.fillRect(this.x, this.y, 3, 3);
+        ctx.globalAlpha = 1;
+    }
+}
+
+class Firework {
+    constructor() {
+        this.x = Math.random() * canvas.width;
+        this.y = canvas.height;
+        this.target = Math.random() * canvas.height / 2;
+        this.color = `hsl(${Math.random()*360},100%,60%)`;
+        this.exploded = false;
+        this.particles = [];
+    }
+    update() {
+        if (!this.exploded) {
+            this.y -= 7;
+            if (this.y <= this.target) {
+                this.exploded = true;
+                for (let i = 0; i < 60; i++) {
+                    this.particles.push(new Particle(this.x, this.y, this.color));
+                }
+            }
+        }
+    }
+    draw() {
+        if (!this.exploded) {
+            ctx.fillStyle = this.color;
+            ctx.fillRect(this.x, this.y, 3, 3);
+        }
+    }
+}
+
+let fireworks = [];
+function animate() {
+    ctx.fillStyle = "rgba(0,0,0,0.25)";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    if (Math.random() < 0.05) fireworks.push(new Firework());
+
+    fireworks.forEach((fw, i) => {
+        fw.update();
+        fw.draw();
+        fw.particles.forEach(p => {
+            p.update();
+            p.draw();
+        });
+        fw.particles = fw.particles.filter(p => p.life > 0);
+        if (fw.exploded && fw.particles.length === 0) fireworks.splice(i, 1);
+    });
+
+    requestAnimationFrame(animate);
+}
+animate();
+</script>
+
+</body>
+</html>
