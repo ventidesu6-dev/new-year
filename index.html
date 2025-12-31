@@ -287,18 +287,38 @@ Cheers sa masayang 2026.`,
 };
 
 function showMessage() {
-  const name = nameInput.value.trim().toLowerCase();
-  if (!name) return alert("Maglagay muna ng pangalan 😊");
+  const input = document.getElementById("nameInput");
+  const name = input.value.trim().toLowerCase();
 
-  popupImg.src = name + ".jpg";
-  imagePopup.style.display = "flex";
+  if (!name) {
+    alert("Maglagay muna ng pangalan 😊");
+    return;
+  }
+
+  const popup = document.getElementById("imagePopup");
+  const popupImg = document.getElementById("popupImg");
+  const title = document.getElementById("title");
+  const message = document.getElementById("message");
+  const box = document.getElementById("messageBox");
+
+  // SET IMAGE (SAFE WAY)
+  popupImg.src = images[name] || "default.jpg";
+
+  popup.style.display = "flex";
 
   setTimeout(() => {
-    imagePopup.style.display = "none";
-    title.innerText = "Para kay " + name.charAt(0).toUpperCase() + name.slice(1);
-    message.innerText = messages[name] || "Happy New Year 🎆";
-    messageBox.style.display = "block";
+    popup.style.display = "none";
+
+    title.innerText =
+      "Para kay " + name.charAt(0).toUpperCase() + name.slice(1) + " 💫";
+
+    message.innerText =
+      messages[name] || "Happy New Year 🎆 Sana maging masaya ang buong taon mo.";
+
+    box.style.display = "block";
   }, 1800);
+}
+
 
     const images = {
   nicol: "nicol.jpg",
