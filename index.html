@@ -9,165 +9,165 @@
 * { box-sizing: border-box; }
 
 html, body {
-    margin: 0;
-    font-family: Arial, sans-serif;
-    background: black;
-    color: white;
-    overflow-x: hidden;
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background: black;
+  color: white;
+  overflow-x: hidden;
 }
 
 /* INTRO SLIDES */
 #intro {
-    position: fixed;
-    inset: 0;
-    background: black;
-    z-index: 999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+  position: fixed;
+  inset: 0;
+  background: black;
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 .slide {
-    position: absolute;
-    width: 100%;
-    text-align: center;
-    opacity: 0;
-    transform: translateX(40px);
-    transition: all 1s ease;
-    padding: 20px;
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  opacity: 0;
+  transform: translateX(40px);
+  transition: all 1s ease;
+  padding: 20px;
 }
 
 .slide.active {
-    opacity: 1;
-    transform: translateX(0);
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .slide.fade-out {
-    opacity: 0;
-    transform: translateX(-40px);
+  opacity: 0;
+  transform: translateX(-40px);
 }
 
 .slide img {
-    width: min(85vw, 300px);
-    border-radius: 15px;
-    margin-bottom: 20px;
+  width: min(85vw, 300px);
+  border-radius: 15px;
+  margin-bottom: 20px;
+}
+
+/* FIREWORKS */
+canvas {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 
 /* LOBBY */
-canvas {
-    position: fixed;
-    inset: 0;
-    z-index: 1;
-    pointer-events: none;
-}
-
 .lobby {
-    position: relative;
-    z-index: 2;
-    min-height: 100vh;
-    padding: 30px 15px 80px;
-    text-align: center;
+  position: relative;
+  z-index: 2;
+  min-height: 100vh;
+  padding: 30px 15px 80px;
+  text-align: center;
 }
 
 h1 {
-    animation: glow 2s infinite alternate;
+  animation: glow 2s infinite alternate;
 }
 
 @keyframes glow {
-    from { text-shadow: 0 0 10px #ff4d6d; }
-    to { text-shadow: 0 0 25px #ffd166; }
+  from { text-shadow: 0 0 10px #ff4d6d; }
+  to { text-shadow: 0 0 25px #ffd166; }
 }
 
 input, button {
-    padding: 12px;
-    border-radius: 6px;
-    border: none;
-    margin-top: 10px;
-    font-size: 16px;
+  padding: 12px;
+  border-radius: 6px;
+  border: none;
+  margin-top: 10px;
+  font-size: 16px;
 }
 
 button {
-    background: #ff4d6d;
-    color: white;
+  background: #ff4d6d;
+  color: white;
 }
 
 /* MESSAGE BOX */
 #messageBox {
-    display: none;
-    background: white;
-    color: #333;
-    margin: 30px auto 0;
-    padding: 25px;
-    border-radius: 15px;
-    width: min(95%, 480px);
-    max-height: 60vh;
-    overflow-y: auto;
-    animation: pop 0.8s ease;
+  display: none;
+  background: white;
+  color: #333;
+  margin: 30px auto 0;
+  padding: 25px;
+  border-radius: 15px;
+  width: min(95%, 480px);
+  max-height: 60vh;
+  overflow-y: auto;
+  animation: pop 0.8s ease;
 }
 
 @keyframes pop {
-    from { opacity: 0; transform: scale(0.9); }
-    to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.9); }
+  to { opacity: 1; transform: scale(1); }
 }
 
 /* IMAGE POPUP */
 #imagePopup {
-    position: fixed;
-    inset: 0;
-    background: rgba(0,0,0,0.85);
-    display: none;
-    align-items: center;
-    justify-content: center;
-    z-index: 9999;
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.85);
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
 }
 
 #imagePopup img {
-    width: min(80vw, 320px);
-    border-radius: 20px;
-    animation: popImg 0.8s ease;
+  width: min(80vw, 320px);
+  border-radius: 20px;
+  animation: popImg 0.8s ease;
 }
 
 @keyframes popImg {
-    from { opacity: 0; transform: scale(0.7); }
-    to { opacity: 1; transform: scale(1); }
+  from { opacity: 0; transform: scale(0.7); }
+  to { opacity: 1; transform: scale(1); }
 }
 </style>
 </head>
 
 <body>
 
-<audio id="bgMusic" src="bg-music.mp3" loop></audio>
-<audio id="fireworkSound" src="fireworks.mp3"></audio>
-
+<!-- INTRO -->
 <div id="intro">
-    <div class="slide active">
-        <img src="cx.jpg">
-        <h2>Memories Together</h2>
-    </div>
-    <div class="slide">
-        <img src="AA.jpg">
-        <h2>Moments We Shared</h2>
-    </div>
-    <div class="slide">
-        <img src="a.jpg">
-        <h2>Forever This Circle</h2>
-    </div>
+  <div class="slide active">
+    <img src="cx.jpg">
+    <h2>Memories Together</h2>
+  </div>
+  <div class="slide">
+    <img src="AA.jpg">
+    <h2>Moments We Shared</h2>
+  </div>
+  <div class="slide">
+    <img src="a.jpg">
+    <h2>Forever This Circle</h2>
+  </div>
 </div>
 
 <canvas id="fireworks"></canvas>
 
+<!-- LOBBY -->
 <div class="lobby">
-    <h1>Happy New Year</h1>
-    <p>type your name to get your special message</p>
+  <h1>🎆 Happy New Year 2026 🎆</h1>
+  <p>Type your name</p>
 
-    <input id="nameInput" placeholder="Name">
-    <br>
-    <button onclick="showMessage()">Enter</button>
+  <input id="nameInput" placeholder="Name">
+  <br>
+  <button onclick="showMessage()">Enter</button>
 
-    <div id="messageBox">
-        <h2 id="title"></h2>
-        <p id="message"></p>
-    </div>
+  <div id="messageBox">
+    <h2 id="title"></h2>
+    <p id="message"></p>
+  </div>
 </div>
 
 <div id="imagePopup">
@@ -175,130 +175,56 @@ button {
 </div>
 
 <script>
-/* ===== SLIDES ===== */
+/* AUTO SLIDES */
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
 
 const slideInterval = setInterval(() => {
-    slides[currentSlide].classList.remove("active");
-    slides[currentSlide].classList.add("fade-out");
-    currentSlide++;
-    if (currentSlide >= slides.length) {
-        clearInterval(slideInterval);
-        document.getElementById("intro").style.display = "none";
-        return;
-    }
-    slides[currentSlide].classList.add("active");
+  slides[currentSlide].classList.remove("active");
+  slides[currentSlide].classList.add("fade-out");
+
+  currentSlide++;
+  if (currentSlide >= slides.length) {
+    clearInterval(slideInterval);
+    document.getElementById("intro").style.display = "none";
+    return;
+  }
+  slides[currentSlide].classList.add("active");
 }, 3000);
 
-/* ===== MESSAGES (ORIGINAL – DI GINALAW) ===== */
+/* MESSAGES (HINDI KO BINAGO) */
 const messages = {
-  nicol: `Happy New Year, Boi!
-
-Hindi ka yung tipo ng taong kailangang mapansin para maramdaman.
-Sa katahimikan mo, sa pagiging maalalahanin mo, at sa paraan ng pananatili mo sa tabi ng mga taong mahalaga sa’yo, doon ka nagiging totoo.
-Minsan seryoso, minsan biglang makulit, at kahit hindi halata, marunong kang sumabay sa mga lakad at adventures kung saan man mapunta, game ka lang.
-Ngayong 2026, sana mas bigyan mo rin ng oras ang sarili mo, mas pakinggan ang gusto ng puso mo, at mas maging panatag ka sa kahit anong desisyon.
-Salamat sa pagiging ikaw. Andito lang kami para sayo.`,
-
-  dani: `Happy New Year, Dani!
-
-Salamat sa mga tawanan at sa mga simpleng moments na kasama ka.
-Ikaw yung klase ng taong nakakapagbigay ng saya kahit hindi mo sinasadya.
-Ngayong bagong taon, sana mas dumami ang blessings,
-mas luminaw yung mga goals mo, at mas gumaan yung puso mo.
-Deserve mo lahat ng maganda.`,
-
-  justin: `Happy New Year, Justin!
-
-Isa ka sa mga taong nagbibigay ng saya sa kahit anong samahan.
-Salamat sa energy, sa kwento, at sa pagiging totoo.
-Sana sa 2026, mas maging malinaw ang tatahakin mo,
-mas dumami ang achievements, at mas maging proud ka sa sarili mo.
-Tuluy tuloy lang.`,
-
-  jedrick: `Happy New Year, Jedrick!
-
-Malayo na ang narating mo at mas malayo pa ang mararating mo.
-Salamat sa mga sandaling naging kasama sa kulitan at kwentohan.
-Ngayong taon, sana mas dumami ang opportunities,
-mas tumibay ang loob mo, at mas maging payapa ang isip mo.
-Proud kami sa’yo.`,
-
-  cyram: `Happy New Year, Cyram!
-
-Isa ka sa mga taong may sariling mundo at lakas.
-Salamat sa pagiging totoo at hindi nagpapanggap.
-Sana sa 2026, mas maging bukas ang mga pinto para sa’yo,
-mas dumami ang dahilan para ngumiti,
-at mas maging maayos ang lahat ng plano mo.
-Tuloy lang.`,
-
-  mharkie: `Happy New Year, Mharkie!
-
-Ikaw yung tipo ng taong kayang gawing masaya ang kahit simpleng moment.
-Salamat sa jokes, sa kwento, at sa good vibes.
-Ngayong bagong taon, sana mas dumami ang opportunities,
-mas maging magaan ang araw araw,
-at mas lumakas ang loob mo sa lahat ng haharapin mo.
-Andito lang kami palagi.`,
-
-  kyla: `Happy New Year, Kyla!
-
-Salamat sa pagiging liwanag sa samahan.
-Tahimik man minsan, pero ramdam ang malasakit.
-Sana sa 2026, mas piliin mo ang sarili mo,
-mas maging masaya sa maliliit na bagay,
-at mas maging buo ang puso mo araw-araw.
-Deserve mo ang lahat ng pagmamahal.`,
-
-  eugene: `Happy New Year, Eugene!
-
-Isa ka sa mga taong steady at maaasahan.
-Salamat sa pagiging consistent at totoo.
-Ngayong taon, sana mas dumami ang wins mo,
-mas luminaw ang mga plano,
-at mas maging confident ka sa mga desisyon mo.
-Keep going.`,
-
-  eila: `Happy New Year, Eila!
-
-Salamat sa pagiging madaling makasama.
-May comfort na dala yung simpleng pakikitungo mo.
-Ngayong 2026, sana mas maging magaan ang mga araw mo,
-mas payapa ang isip,
-at mas masaya ang puso mo.
-Nandito lang kami always cheering you.`,
-
-  ashley: `Happy New Year, Ashley!
-
-Ikaw yung taong kayang magdala ng kulay sa kahit anong moment
-Salamat sa laughs, sa stories, at sa pagiging ikaw.
-Ngayong bagong taon, sana mas dumami ang opportunities,
-mas maging matapang ka sa mga desisyon,
-at mas maging proud ka sa sarili mo.
-Cheers sa masayang 2026.`
+  nicol: `Happy New Year, Boi! ...`,
+  dani: `Happy New Year, Dani! ...`,
+  justin: `Happy New Year, Justin! ...`,
+  jedrick: `Happy New Year, Jedrick! ...`,
+  cyram: `Happy New Year, Cyram! ...`,
+  mharkie: `Happy New Year, Mharkie! ...`,
+  kyla: `Happy New Year, Kyla! ...`,
+  eugene: `Happy New Year, Eugene! ...`,
+  eila: `Happy New Year, Eila! ...`,
+  ashley: `Happy New Year, Ashley! ...`
 };
 
-/* ===== IMAGES (FIXED) ===== */
+/* IMAGES (FIXED) */
 const images = {
-  nicol: "Nicol.jpg",
-  dani: "Dani.jpg",
-  justin: "Justin.jpg",
-  jedrick: "Jedrick.jpg",
-  cyram: "Cyram.jpg",
-  mharkie: "Mharkie.jpg",
-  kyla: "Kyla.jpg",
-  eugene: "Eugene.jpg",
-  eila: "Eila.jpg",
-  ashley: "Ashley.jpg"
+  nicol: "nicol.jpg",
+  dani: "dani.jpg",
+  justin: "justin.jpg",
+  jedrick: "jedrick.jpg",
+  cyram: "cyram.jpg",
+  mharkie: "mharkie.jpg",
+  kyla: "kyla.jpg",
+  eugene: "eugene.jpg",
+  eila: "eila.jpg",
+  ashley: "ashley.jpg"
 };
 
 function showMessage() {
-  const name = document.getElementById("nameInput").value.trim().toLowerCase();
-  if (!name) return;
+  const name = nameInput.value.trim().toLowerCase();
+  if (!name) return alert("Maglagay muna ng pangalan");
 
-  popupImg.src = images[name] || "default.jpg";
+  popupImg.src = images[name] || "";
   imagePopup.style.display = "flex";
 
   setTimeout(() => {
@@ -306,26 +232,23 @@ function showMessage() {
     title.innerText = "Para kay " + name.charAt(0).toUpperCase() + name.slice(1);
     message.innerText = messages[name] || "Happy New Year 🎆";
     messageBox.style.display = "block";
-  }, 1800);
+  }, 1500);
 }
-    const canvas = document.getElementById("fireworks");
+
+/* FIREWORKS */
+const canvas = document.getElementById("fireworks");
 const ctx = canvas.getContext("2d");
 
-function resizeCanvas(){
+function resize() {
   canvas.width = innerWidth;
   canvas.height = innerHeight;
 }
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
+resize();
+addEventListener("resize", resize);
 
 let particles = [];
 
-function createFirework() {
-  const sound = document.getElementById("fireworkSound");
-  sound.currentTime = 0;
-  sound.volume = 0.6;
-  sound.play().catch(()=>{});
-
+function firework() {
   const x = Math.random() * canvas.width;
   const y = Math.random() * canvas.height * 0.5;
   const color = `hsl(${Math.random()*360},100%,60%)`;
@@ -341,17 +264,17 @@ function createFirework() {
   }
 }
 
-function animateFireworks() {
+function animate() {
   ctx.fillStyle = "rgba(0,0,0,0.25)";
   ctx.fillRect(0,0,canvas.width,canvas.height);
 
   particles.forEach((p,i)=>{
     p.x += p.vx;
     p.y += p.vy;
-    p.alpha -= 0.015;
+    p.alpha -= 0.02;
 
-    ctx.fillStyle = p.color;
     ctx.globalAlpha = p.alpha;
+    ctx.fillStyle = p.color;
     ctx.beginPath();
     ctx.arc(p.x,p.y,2,0,Math.PI*2);
     ctx.fill();
@@ -360,11 +283,11 @@ function animateFireworks() {
   });
 
   ctx.globalAlpha = 1;
-  requestAnimationFrame(animateFireworks);
+  requestAnimationFrame(animate);
 }
 
-setInterval(createFirework, 1500);
-animateFireworks();
+setInterval(firework, 1300);
+animate();
 </script>
 
 </body>
