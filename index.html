@@ -136,31 +136,28 @@ button {
 
 <body>
 
-<!-- AUDIO -->
 <audio id="bgMusic" src="bg-music.mp3" loop></audio>
 <audio id="fireworkSound" src="fireworks.mp3"></audio>
 
-<!-- INTRO -->
 <div id="intro">
     <div class="slide active">
         <img src="cx.jpg">
-        <h2>Memories Together </h2>
+        <h2>Memories Together</h2>
     </div>
     <div class="slide">
         <img src="AA.jpg">
-        <h2>Moments We Shared </h2>
+        <h2>Moments We Shared</h2>
     </div>
     <div class="slide">
         <img src="a.jpg">
-        <h2>Forever This Circle </h2>
+        <h2>Forever This Circle</h2>
     </div>
 </div>
 
 <canvas id="fireworks"></canvas>
 
-<!-- LOBBY -->
 <div class="lobby">
-    <h1>Happy New Year </h1>
+    <h1>Happy New Year</h1>
     <p>type your name to get your special message</p>
 
     <input id="nameInput" placeholder="Name">
@@ -178,14 +175,13 @@ button {
 </div>
 
 <script>
-/* ===== AUTO SLIDES ===== */
+/* ===== SLIDES ===== */
 const slides = document.querySelectorAll(".slide");
 let currentSlide = 0;
 
 const slideInterval = setInterval(() => {
     slides[currentSlide].classList.remove("active");
     slides[currentSlide].classList.add("fade-out");
-
     currentSlide++;
     if (currentSlide >= slides.length) {
         clearInterval(slideInterval);
@@ -195,10 +191,9 @@ const slideInterval = setInterval(() => {
     slides[currentSlide].classList.add("active");
 }, 3000);
 
-/* ===== MESSAGES ===== */
+/* ===== MESSAGES (ORIGINAL – DI GINALAW) ===== */
 const messages = {
   nicol: `Happy New Year, Boi!
-
 
 Hindi ka yung tipo ng taong kailangang mapansin para maramdaman.
 Sa katahimikan mo, sa pagiging maalalahanin mo, at sa paraan ng pananatili mo sa tabi ng mga taong mahalaga sa’yo, doon ka nagiging totoo.
@@ -212,8 +207,7 @@ Salamat sa mga tawanan at sa mga simpleng moments na kasama ka.
 Ikaw yung klase ng taong nakakapagbigay ng saya kahit hindi mo sinasadya.
 Ngayong bagong taon, sana mas dumami ang blessings,
 mas luminaw yung mga goals mo, at mas gumaan yung puso mo.
-Deserve mo lahat ng maganda.
-`,
+Deserve mo lahat ng maganda.`,
 
   justin: `Happy New Year, Justin!
 
@@ -231,12 +225,12 @@ Ngayong taon, sana mas dumami ang opportunities,
 mas tumibay ang loob mo, at mas maging payapa ang isip mo.
 Proud kami sa’yo.`,
 
-  cyram: `Happy New Year, Cyram! 
+  cyram: `Happy New Year, Cyram!
 
 Isa ka sa mga taong may sariling mundo at lakas.
 Salamat sa pagiging totoo at hindi nagpapanggap.
 Sana sa 2026, mas maging bukas ang mga pinto para sa’yo,
-mas dumami ang dahilan para ngumiti, 
+mas dumami ang dahilan para ngumiti,
 at mas maging maayos ang lahat ng plano mo.
 Tuloy lang.`,
 
@@ -249,7 +243,7 @@ mas maging magaan ang araw-araw,
 at mas lumakas ang loob mo sa lahat ng haharapin mo.
 Andito lang kami palagi.`,
 
-  kyla: `Happy New Year, Kyla! 
+  kyla: `Happy New Year, Kyla!
 
 Salamat sa pagiging liwanag sa samahan.
 Tahimik man minsan, pero ramdam ang malasakit.
@@ -258,7 +252,7 @@ mas maging masaya sa maliliit na bagay,
 at mas maging buo ang puso mo araw-araw.
 Deserve mo ang lahat ng pagmamahal.`,
 
-  eugene: `Happy New Year, Eugene! 
+  eugene: `Happy New Year, Eugene!
 
 Isa ka sa mga taong steady at maaasahan.
 Salamat sa pagiging consistent at totoo.
@@ -276,142 +270,44 @@ mas payapa ang isip,
 at mas masaya ang puso mo.
 Nandito lang kami always cheering you.`,
 
-  ashley: `Happy New Year, Ashley! 
+  ashley: `Happy New Year, Ashley!
 
 Ikaw yung taong kayang magdala ng kulay sa kahit anong moment.
 Salamat sa laughs, sa stories, at sa pagiging ikaw.
 Ngayong bagong taon, sana mas dumami ang opportunities,
 mas maging matapang ka sa mga desisyon,
 at mas maging proud ka sa sarili mo.
-Cheers sa masayang 2026.`,
+Cheers sa masayang 2026.`
+};
+
+/* ===== IMAGES (FIXED) ===== */
+const images = {
+  nicol: "Nicol.jpg",
+  dani: "Dani.jpg",
+  justin: "Justin.jpg",
+  jedrick: "Jedrick.jpg",
+  cyram: "Cyram.jpg",
+  mharkie: "Mharkie.jpg",
+  kyla: "Kyla.jpg",
+  eugene: "Eugene.jpg",
+  eila: "Eila.jpg",
+  ashley: "Ashley.jpg"
 };
 
 function showMessage() {
-  const input = document.getElementById("nameInput");
-  const name = input.value.trim().toLowerCase();
+  const name = document.getElementById("nameInput").value.trim().toLowerCase();
+  if (!name) return;
 
-  if (!name) {
-    alert("Maglagay muna ng pangalan 😊");
-    return;
-  }
-
-  const popup = document.getElementById("imagePopup");
-  const popupImg = document.getElementById("popupImg");
-  const title = document.getElementById("title");
-  const message = document.getElementById("message");
-  const box = document.getElementById("messageBox");
-
-  // SET IMAGE (SAFE WAY)
   popupImg.src = images[name] || "default.jpg";
-
-  popup.style.display = "flex";
+  imagePopup.style.display = "flex";
 
   setTimeout(() => {
-    popup.style.display = "none";
-
-    title.innerText =
-      "Para kay " + name.charAt(0).toUpperCase() + name.slice(1) + " 💫";
-
-    message.innerText =
-      messages[name] || "Happy New Year 🎆 Sana maging masaya ang buong taon mo.";
-
-    box.style.display = "block";
+    imagePopup.style.display = "none";
+    title.innerText = "Para kay " + name.charAt(0).toUpperCase() + name.slice(1);
+    message.innerText = messages[name] || "Happy New Year 🎆";
+    messageBox.style.display = "block";
   }, 1800);
 }
-
-
-    const images = {
-  Nicol: "Nicol.jpg",
-  Dani: "Dani.jpg",
-  Justin: "Justin.jpg",
-  Jedrick: "Jedrick.jpg",
-  Cyram: "Cyram.jpg",
-  Mharkie: "Mharkie.jpg",
-  Kyla: "Kyla.jpg",
-  Eugene: "Eugene.jpg",
-  Eila: "Eila.jpg",
-  Ashley: "Ashley.jpg",
-  Angel: "Angel.jpg",
-};
-
-}
-
-/* ===== BACKGROUND MUSIC (FIRST TAP ANYWHERE) ===== */
-const bgMusic = document.getElementById("bgMusic");
-let musicStarted = false;
-
-function startMusicOnce() {
-  if (!musicStarted) {
-    bgMusic.volume = 0.35;
-    bgMusic.play().catch(()=>{});
-    musicStarted = true;
-
-    document.removeEventListener("click", startMusicOnce);
-    document.removeEventListener("touchstart", startMusicOnce);
-  }
-}
-
-document.addEventListener("click", startMusicOnce);
-document.addEventListener("touchstart", startMusicOnce);
-
-/* ===== FIREWORKS ===== */
-const canvas = document.getElementById("fireworks");
-const ctx = canvas.getContext("2d");
-
-function resizeCanvas(){
-  canvas.width = innerWidth;
-  canvas.height = innerHeight;
-}
-resizeCanvas();
-window.addEventListener("resize", resizeCanvas);
-
-let particles = [];
-
-function createFirework() {
-  const sound = document.getElementById("fireworkSound");
-  sound.currentTime = 0;
-  sound.volume = 0.6;
-  sound.play().catch(()=>{});
-
-  const x = Math.random() * canvas.width;
-  const y = Math.random() * canvas.height * 0.5;
-  const color = `hsl(${Math.random()*360},100%,60%)`;
-
-  for (let i = 0; i < 40; i++) {
-    particles.push({
-      x, y,
-      vx: Math.cos((Math.PI*2*i)/40) * (Math.random()*3+2),
-      vy: Math.sin((Math.PI*2*i)/40) * (Math.random()*3+2),
-      alpha: 1,
-      color
-    });
-  }
-}
-
-function animateFireworks() {
-  ctx.fillStyle = "rgba(0,0,0,0.25)";
-  ctx.fillRect(0,0,canvas.width,canvas.height);
-
-  particles.forEach((p,i)=>{
-    p.x += p.vx;
-    p.y += p.vy;
-    p.alpha -= 0.015;
-
-    ctx.fillStyle = p.color;
-    ctx.globalAlpha = p.alpha;
-    ctx.beginPath();
-    ctx.arc(p.x,p.y,2,0,Math.PI*2);
-    ctx.fill();
-
-    if (p.alpha <= 0) particles.splice(i,1);
-  });
-
-  ctx.globalAlpha = 1;
-  requestAnimationFrame(animateFireworks);
-}
-
-setInterval(createFirework, 1500);
-animateFireworks();
 </script>
 
 </body>
